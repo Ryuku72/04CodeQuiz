@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<Html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="style.css" rel="stylesheet">
+  <title>J-Horror Quiz</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Nosifer|Caveat|Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container" id="main-container">
+    <header>
+      <div class="row">
+        <div class="col">
+          <p id="leaderBoard" class="text-center">LeaderBoard</p>
+        </div>
+          <div class="col">
+            <p id="main-page" class="text-center">Main Page</p>
+          </div>
+        <div class="col">
+          <p id="time" class="hide text-center">Time </p>
+        </div>
+        <div class="col">
+          <p id="points" class="hide text-end">Points </p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Header -->
+    <div class="start-container">
+      <div class="row-float" id="main-text">
+        <div class="col-12">
+          <H3 id="start-text">Welcome to Japanese Hororr Cinema and True Stories Quiz</H3>
+          <h5 id="question-text"></h5>
+        </div>
+      </div>
+
+      <!-- Questions -->
+      <div id="question-container" class="hide">
+        <div class="row-float" id="question-buttons">
+        <div id="answer-buttons" class="btn-grid text-start">
+          <button class="btn answer" id="btn0">Answer 1</button>
+          <button class="btn answer" id="btn1">Answer 2</button>
+          <button class="btn answer" id="btn2">Answer 3</button>
+          <button class="btn answer" id="btn3">Answer 4</button>
+        </div>
+        </div>
+      </div>
+
+      <!-- Controls-->
+      <div class="controls">
+        <div class="row-float" id="control-button">
+        <button id="start-btn" class="btn start-btn">Start</button>
+        <button id="next-btn" class="next-btn btn hide">Next</button>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- Footer, Timer & Score -->
+
+  <footer>
+    <div id="footer" class="footer-container">
+      <div class="row">
+        <div class="col">
+          <p id="foreign" class="text-center">FOREIGN TOOLS PROECT 2020</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="script-test.js"></script>
+</body>
+
+</Html>
