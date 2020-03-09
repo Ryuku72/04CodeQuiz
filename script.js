@@ -88,10 +88,20 @@ function resetState() {
   }
 };
 
+function wait(ms){
+  var start = new Date().getTime();
+  var end = start;
+  while(end < start + ms) {
+    end = new Date().getTime();
+ }
+}
+
 function hideRestart() {
   if (shuffledQuestions.length > currentQuestionIndex + 1) {
     nextButton.classList.remove('hide')
   } else {
+    nextButton.classList.remove('hide')
+    wait(2000);
     showScores();
   }
 }
@@ -120,7 +130,6 @@ function udpateTime() {
 };
 
 function showScores() { 
-
   questionContainerElement.classList.add('hide');
   questionElement.innerText = ("Well Done!!");
   questionElement.style.fontSize = "6vw";
