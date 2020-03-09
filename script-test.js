@@ -1,6 +1,6 @@
 var leaderEl = document.getElementById('leaderBoard');
 var MainEl = document.getElementById('main-page');
-var scoreEl = document.getElementById('points');
+var scoreEl = document.getElementById('score');
 var timeEl = document.getElementById('time');
 
 var questionContainerElement = document.getElementById('question-container');
@@ -11,11 +11,11 @@ var questionElement = document.getElementById('question-text');
 
 var startButton = document.getElementById('start-btn');
 var nextButton = document.getElementById('next-btn');
-var answerButton = document.querySelectorAll('#answer');
 
-var currentQuestionIndex = 0;
-var scoreAmount = 0;
-var timeRemain = 120;
+
+var currentQuestionIndex;
+var scoreAmount;
+var timeRemain;
 
 var shuffledQuestions, currentQuestionIndex = undefined;
 
@@ -25,27 +25,28 @@ function startGame() {
     scoreEl.classList.remove('hide');
     timeEl.classList.remove('hide');
     questionContainerElement.classList.remove('hide');
-    timeEl.textContent = "TIME: " + timeRemain + " SEC";
-    scoreEl.textContent ="SCORE: " + scoreAmount;
     shuffledQuestions = questions.sort(() => Math.random() - .5);
     currentQuestionIndex = 0;
     scoreAmount = 0;
     timeRemain = 120;
+
     setNextQuestion();
+    addScore();
+    addTime ();
 };
 
 function addScore () {
-    scoreAmount = scoreAmount + 5;
-}
+    scoreEl.textContent ="SCORE: " + scoreAmount + " POINTS";
+};
 
-function removeTime() {
-    timeRemain = timeRemain - 30;
-}
+function addTime() {
+    timeEl.textContent = "TIME: " + timeRemain + " SEC";
+};
 
 function setNextQuestion() {
     resetState()  // removed lingering buttons
     showQuestion(shuffledQuestions[currentQuestionIndex])
-}
+};
 
 
 function showQuestion(question) {
@@ -64,6 +65,7 @@ question.answers.forEach(answer => {
   button.addEventListener('click', selectAnswer)
   //have to append here to later for status class
   answerButtonsElement.appendChild(button) 
+  
 })
 };
 
@@ -74,16 +76,35 @@ function resetState() {
     while (answerButtonsElement.firstChild) {
       answerButtonsElement.removeChild(answerButtonsElement.firstChild)
     }
-  }
+  };
+
   
   //records which button is selected and checks dataset for correct/wrong
   function selectAnswer(e) {
-    const selectedButton = e.target
-    const correct = selectedButton.dataset.correct
+    var selectedButton = e.target;
+    var correct = selectedButton.dataset.correct;
     setStatusClass(document.body, correct)
     Array.from(answerButtonsElement.children).forEach(button => {
       setStatusClass(button, button.dataset.correct)
-    })
+    });
+
+    hideRestart();
+}
+
+function updateScore() {
+    scoreAmount = scoreAmount + 5;
+    addScore()
+    console.log('scoreAmount');
+}
+
+function udpateTime() {
+    if (timeRemain > 0) {
+    timeRemain = timeRemain - 10;
+    addTime();
+    console.log('timeRemain');
+}};
+
+    function hideRestart () {
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
       nextButton.classList.remove('hide')
     } else {
@@ -96,19 +117,31 @@ function resetState() {
   function setStatusClass(element, correct) {
     clearStatusClass(element)
     if (correct) {
-      element.classList.add('correct')
-      addScore();
+      element.classList.add('correct');
     } else {
       element.classList.add('wrong')
-      removeTime();
     }
   }
-  
   //clears dataSet
   function clearStatusClass(element) {
     element.classList.remove('correct')
     element.classList.remove('wrong')
   }
+
+  function pointsAndTime (event){
+    var element = event.target;
+    if (element.matches("button")) {
+        var state = element.getAttribute("data-correct");
+        if(state === "true") {
+                updateScore();             
+            } else {
+                udpateTime();
+            }     
+        } 
+    };
+
+
+
   
 
 var questions = [{
@@ -213,6 +246,7 @@ var questions = [{
     }
 ];
 
+answerButtonsElement.addEventListener('click', pointsAndTime);
 startButton.addEventListener('click', startGame);
 nextButton.addEventListener('click', () => {
     currentQuestionIndex++

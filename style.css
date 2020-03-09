@@ -95,7 +95,7 @@ header {
   text-shadow: black 5px 1px;
 }
 
-#time, #points {
+#time, #score {
   color: green;
   text-align: start;
 }
