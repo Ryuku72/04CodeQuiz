@@ -54,6 +54,8 @@ Theory: to minus off time you would need to first pause the timer, save the amou
 
 There was a bug I did create. As the next button does not pull the last Quiz question to the ShowScore page the actual score does not update correctly.
 
+Note: Fixed timer. Issue was that the timer was not global. Once fixed I could minus time from countdown! Works!
+
 <a name="score">
 
 ### Adding the HighScore page
@@ -75,7 +77,7 @@ Besides implementing a Hue system I did also use a time displaced called wait fu
 
 Currently, the following issues exists
 * High Score page needs to be restricted to 5 and styles applied
-* Need to still implement a function that reduces the timer by 5 seconds when an answer is wrong
+* FIXED: Need to still implement a function that reduces the timer by 5 seconds when an answer is wrong
 * Need to clean up my code
 * Need to make the website responsive
 * Make the last quiz question update the score before jumping to the showScore function.

@@ -19,11 +19,13 @@ var submitButton = document.getElementById('submit-btn');
 
 var currentQuestionIndex;
 var scoreAmount;
-var timeRemain;
+var timeRemain = 30;
 
 var shuffledQuestions, currentQuestionIndex = undefined;
 
 var userText = [];
+
+var timeId = setInterval(timer, 1000);
 
 init();
 
@@ -46,16 +48,14 @@ function startGame() {
 };
 
 function timer() {
-  var timeRemain = 30;
-  var timer = setInterval(function () {
-    timeEl.textContent = 'TIMER: ' + timeRemain;
-    timeRemain--;
-    if (timeRemain <= 0) {
+   if (timeRemain <= 0) {
       clearInterval(timer);
       timeEl.textContent = 'TIMER: 0';
       showScores();
+    } else {
+timeEl.textContent = 'TIMER: ' + timeRemain;
+  timeRemain--;
     }
-  }, 1000);
 }
 
 function addScore() {
@@ -69,7 +69,6 @@ function updateScore() {
 
 function udpateTime() {
   if (timeRemain > 0) {
-    clearInterval(timer);
     timeRemain = timeRemain -5;
   }
 };
@@ -158,7 +157,6 @@ function showScores() {
   submitButton.classList.remove('hide');
 
   clearInterval(timer);
-  timeEl.textContent = 'TIMER: 0';
 };
 
 function displayMessage(type, message) {
