@@ -22,6 +22,16 @@ var timeRemain;
 
 var shuffledQuestions, currentQuestionIndex = undefined;
 
+var userText = [];
+
+init();
+
+function resetButton() {
+  window.location.reload();
+}
+
+
+
 function startGame() {
   startButton.classList.add('hide');
   startText.classList.add('hide');
@@ -150,23 +160,76 @@ function displayMessage(type, message) {
   submitButton.setAttribute("class", type);
 }
 
-submitButton.addEventListener("click", function(){
+function renderStats() {
+  questionContainerElement.innerHtml = "";
+
+  // Render a new li for each todo
+  for (var i = 0; i < userText.length; i++) {
+    var user = userText[i];
+
+    var li = document.createElement("li");
+    li.textContent = user;
+    li.setAttribute("data-index", i);
+
+    questionContainerElement.appendChild(li);
+  }
+}
+
+function init() {
+  // Get stored todos from localStorage
+  // Parsing the JSON string to an object
+  var storedScore = JSON.parse(localStorage.getItem("userText"));
+
+  // If todos were retrieved from localStorage, update the todos array to it
+  if (storedScore !== null) {
+    userText = storedScore;
+  }
+  // Render todos to the DOM
+  renderStats();
+}
+
+
+
+function storeText() {
+  // Stringify and set "todos" key in localStorage to todos array
+  localStorage.setItem("userText", JSON.stringify(userText));
+}
+
+submitButton.addEventListener("click", function(event){
 event.preventDefault();
 
-var user = {
+var userDetails = {
   userName: inputEl.value.trim(),
   score: scoreAmount,
-};
-
-console.log(user);  
+}; 
 
 // validate the fields
-if (user.userName === "") {
+if (userDetails.userName === "") {
   displayMessage("error", "First name cannot be blank");
+}
 
-    localStorage.setItem("user", JSON.stringify(user));
-  };
+userText.push(userDetails);
+inputEl.value = "";
+
+storeText();
+GameOver();
+
 });
+
+function GameOver () {
+  questionContainerElement.classList.add('hide');
+  submitButton.classList.add('hide');
+  nextButton.classList.add('hide');
+  inputEl.classList.add('hide');
+  startButton.classList.add('hide');
+  startText.classList.add('hide');
+  questionElement.innerText = ("Top Score // Leaderboard");
+  questionElement.style.fontSize = "3vw";
+  questionElement.style.color = "blue";
+
+  
+  renderStats();
+}
 
 //sets dataSet
 function setStatusClass(element, correct) {
@@ -179,7 +242,7 @@ function setStatusClass(element, correct) {
 }
 //clears dataSet
 function clearStatusClass(element) {
-  element.classList.remove('correct')
+  element.classList.remove('correct')-0
   element.classList.remove('wrong')
 }
 
@@ -298,6 +361,8 @@ var questions = [{
   }
 ];
 
+leaderEl.addEventListener('click', GameOver);
+MainEl.addEventListener('click', resetButton);
 answerButtonsElement.addEventListener('click', pointsAndTime);
 startButton.addEventListener('click', startGame);
 nextButton.addEventListener('click', () => {

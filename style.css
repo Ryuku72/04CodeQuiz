@@ -195,6 +195,20 @@ header {
     border: black solid 2px;
   }
 
+#main-page:hover {
+  color: red;
+  text-shadow: purple 1px 1px;
+  font-size: 1.5vh;
+  
+}
+
+#leaderBoard:hover {
+  color: blue;
+  text-shadow: purple 1px 1px;
+  font-size: 1.5vh;
+  
+}
+
 /* Utility */
 
   :root {
