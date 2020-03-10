@@ -7,13 +7,14 @@ var questionContainerElement = document.getElementById('question-container');
 var answerButtonsElement = document.getElementById('answer-buttons');
 var startContainerElement = document.getElementById('start-container');
 
+var leaderText = document.getElementById('leaderBoard-text')
 var startText = document.getElementById('start-text');
 var questionElement = document.getElementById('question-text');
 
 var startButton = document.getElementById('start-btn');
 var nextButton = document.getElementById('next-btn');
 var inputEl = document.querySelector("#input-source");
-var submitButton= document.getElementById('submit-btn');
+var submitButton = document.getElementById('submit-btn');
 
 
 var currentQuestionIndex;
@@ -30,8 +31,6 @@ function resetButton() {
   window.location.reload();
 }
 
-
-
 function startGame() {
   startButton.classList.add('hide');
   startText.classList.add('hide');
@@ -46,14 +45,14 @@ function startGame() {
   timer()
 };
 
-function timer(){
+function timer() {
   var timeRemain = 90;
-  var timer = setInterval(function(){
-      timeEl.textContent='TIMER: '+ timeRemain;
-      timeRemain--;
-      if (timeRemain < 0) {
-          clearInterval(timer);
-      }
+  var timer = setInterval(function () {
+    timeEl.textContent = 'TIMER: ' + timeRemain;
+    timeRemain--;
+    if (timeRemain < 0) {
+      clearInterval(timer);
+    }
   }, 1000);
 }
 
@@ -98,12 +97,12 @@ function resetState() {
   }
 };
 
-function wait(ms){
+function wait(ms) {
   var start = new Date().getTime();
   var end = start;
-  while(end < start + ms) {
+  while (end < start + ms) {
     end = new Date().getTime();
- }
+  }
 }
 
 function hideRestart() {
@@ -139,8 +138,9 @@ function udpateTime() {
   }
 };
 
-function showScores() { 
+function showScores() {
   questionContainerElement.classList.add('hide');
+  nextButton.classList.add('hide');
   questionElement.innerText = ("Well Done!!");
   questionElement.style.fontSize = "6vw";
 
@@ -161,17 +161,19 @@ function displayMessage(type, message) {
 }
 
 function renderStats() {
-  questionContainerElement.innerHtml = "";
+
 
   // Render a new li for each todo
   for (var i = 0; i < userText.length; i++) {
     var user = userText[i];
 
+
     var li = document.createElement("li");
-    li.textContent = user;
+    li.style.color = "white";
+    li.textContent = user.userName + " | score: " + user.score;
     li.setAttribute("data-index", i);
 
-    questionContainerElement.appendChild(li);
+    leaderText.appendChild(li);
   }
 }
 
@@ -189,45 +191,46 @@ function init() {
 }
 
 
-
 function storeText() {
   // Stringify and set "todos" key in localStorage to todos array
   localStorage.setItem("userText", JSON.stringify(userText));
 }
 
-submitButton.addEventListener("click", function(event){
-event.preventDefault();
+submitButton.addEventListener("click", function (event) {
+  event.preventDefault();
 
-var userDetails = {
-  userName: inputEl.value.trim(),
-  score: scoreAmount,
-}; 
+  var userDetails = {
+    userName: inputEl.value.trim(),
+    score: scoreAmount,
+  };
 
-// validate the fields
-if (userDetails.userName === "") {
-  displayMessage("error", "First name cannot be blank");
-}
+  // validate the fields
+  if (userDetails.userName === "") {
+    displayMessage("error", "First name cannot be blank");
+  }
 
-userText.push(userDetails);
-inputEl.value = "";
+  userText.push(userDetails);
+  inputEl.value = "";
 
-storeText();
-GameOver();
+  storeText();
+  GameOver();
 
 });
 
-function GameOver () {
+function GameOver() {
   questionContainerElement.classList.add('hide');
+  leaderText.classList.remove('hide');
   submitButton.classList.add('hide');
   nextButton.classList.add('hide');
   inputEl.classList.add('hide');
   startButton.classList.add('hide');
   startText.classList.add('hide');
-  questionElement.innerText = ("Top Score // Leaderboard");
-  questionElement.style.fontSize = "3vw";
-  questionElement.style.color = "blue";
+  leaderText.innerText = ("Top Score // Leaderboard");
+  leaderText.style.fontSize = "2vw";
+  leaderText.style.color = "green";
 
-  
+
+  storeText();
   renderStats();
 }
 
@@ -242,7 +245,7 @@ function setStatusClass(element, correct) {
 }
 //clears dataSet
 function clearStatusClass(element) {
-  element.classList.remove('correct')-0
+  element.classList.remove('correct')
   element.classList.remove('wrong')
 }
 
@@ -257,7 +260,7 @@ function pointsAndTime(event) {
     }
   };
 
-};  
+};
 
 var questions = [{
     question: 'Ringu released in Japan 1998 was based on which famous story?',
