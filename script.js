@@ -54,7 +54,6 @@ function timer() {
       clearInterval(timer);
       timeEl.textContent = 'TIMER: 0';
       showScores();
-    
     }
   }, 1000);
 }
@@ -70,6 +69,7 @@ function updateScore() {
 
 function udpateTime() {
   if (timeRemain > 0) {
+    clearInterval(timer);
     timeRemain = timeRemain -5;
   }
 };
@@ -126,6 +126,7 @@ function hideRestart() {
     nextButton.classList.remove('hide')
     wait(2000);
     showScores();
+    
   }
 }
 
@@ -140,7 +141,6 @@ function selectAnswer(e) {
 
   hideRestart();
 }
-
 
 function showScores() {
   questionContainerElement.classList.add('hide');
@@ -157,6 +157,8 @@ function showScores() {
   inputEl.classList.remove('hide');
   submitButton.classList.remove('hide');
 
+  clearInterval(timer);
+  timeEl.textContent = 'TIMER: 0';
 };
 
 function displayMessage(type, message) {
