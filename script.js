@@ -46,12 +46,15 @@ function startGame() {
 };
 
 function timer() {
-  var timeRemain = 90;
+  var timeRemain = 30;
   var timer = setInterval(function () {
     timeEl.textContent = 'TIMER: ' + timeRemain;
     timeRemain--;
-    if (timeRemain < 0) {
+    if (timeRemain <= 0) {
       clearInterval(timer);
+      timeEl.textContent = 'TIMER: 0';
+      showScores();
+    
     }
   }, 1000);
 }
@@ -60,6 +63,16 @@ function addScore() {
   scoreEl.textContent = "SCORE: " + scoreAmount + " POINTS";
 };
 
+function updateScore() {
+  scoreAmount = scoreAmount + 5;
+  addScore();
+}
+
+function udpateTime() {
+  if (timeRemain > 0) {
+    timeRemain = timeRemain -5;
+  }
+};
 
 function setNextQuestion() {
   resetState() // removed lingering buttons
@@ -97,6 +110,7 @@ function resetState() {
   }
 };
 
+// add a delay on the last question
 function wait(ms) {
   var start = new Date().getTime();
   var end = start;
@@ -127,16 +141,6 @@ function selectAnswer(e) {
   hideRestart();
 }
 
-function updateScore() {
-  scoreAmount = scoreAmount + 5;
-  addScore();
-}
-
-function udpateTime() {
-  if (timeRemain > 0) {
-    timeRemain - 10;
-  }
-};
 
 function showScores() {
   questionContainerElement.classList.add('hide');
@@ -161,8 +165,6 @@ function displayMessage(type, message) {
 }
 
 function renderStats() {
-
-
   // Render a new li for each todo
   for (var i = 0; i < userText.length; i++) {
     var user = userText[i];
@@ -206,7 +208,7 @@ submitButton.addEventListener("click", function (event) {
 
   // validate the fields
   if (userDetails.userName === "") {
-    displayMessage("error", "First name cannot be blank");
+    displayMessage("error", "Name cannot be blank");
   }
 
   userText.push(userDetails);
@@ -218,20 +220,23 @@ submitButton.addEventListener("click", function (event) {
 });
 
 function GameOver() {
+
   questionContainerElement.classList.add('hide');
-  leaderText.classList.remove('hide');
-  submitButton.classList.add('hide');
   nextButton.classList.add('hide');
+  questionElement.classList.add('hide');
+  submitButton.classList.add('hide');
   inputEl.classList.add('hide');
   startButton.classList.add('hide');
   startText.classList.add('hide');
+  leaderText.classList.remove('hide');
+
   leaderText.innerText = ("Top Score // Leaderboard");
   leaderText.style.fontSize = "2vw";
   leaderText.style.color = "green";
 
-
   storeText();
   renderStats();
+
 }
 
 //sets dataSet
