@@ -19,7 +19,7 @@ var submitButton = document.getElementById('submit-btn');
 
 var currentQuestionIndex;
 var scoreAmount;
-var timeRemain = 30;
+var timeRemain;
 
 var shuffledQuestions, currentQuestionIndex = undefined;
 
@@ -42,6 +42,8 @@ function startGame() {
   shuffledQuestions = questions.sort(() => Math.random() - .5);
   currentQuestionIndex = 0;
   scoreAmount = 0;
+  timeRemain = 30;
+  clearInterval(timer);
   setNextQuestion();
   addScore();
   timer()
@@ -49,7 +51,7 @@ function startGame() {
 
 function timer() {
    if (timeRemain <= 0) {
-      clearInterval(timer);
+    clearInterval(timer);
       timeEl.textContent = 'TIMER: 0';
       showScores();
     } else {
