@@ -1,9 +1,9 @@
-![GitHub last commit](https://img.shields.io/github/last-commit/Ryuku72/HomeworkW4?style=for-the-badge)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/y/Ryuku72/HomeworkW4?style=for-the-badge)
-![GitHub contributors](https://img.shields.io/github/contributors/Ryuku72/HomeworkW4?style=for-the-badge)
+![GitHub last commit](https://img.shields.io/github/last-commit/Ryuku72/04CodeQuiz?style=for-the-badge)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/Ryuku72/04CodeQuiz?style=for-the-badge)
+![GitHub contributors](https://img.shields.io/github/contributors/Ryuku72/04CodeQuiz?style=for-the-badge)
 
-## HomeWorkW4
-Homework 4: Quiz App
+## Code Quiz
+__PROJECT04: 11/03/2020__
 
 ## Aim // Introduction
 This week we looked at how to manipulate the DOM to target, create and manipulate Elements through examples of shopping lists, timers, form applications and targetting exerciese. This assignments aim was to utilize theese leasons coupled with our Google-Fu to find the best means of creating the quiz app that included multiple choice, a timer, a page reset and points allocation.
