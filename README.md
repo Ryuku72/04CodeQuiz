@@ -2,7 +2,7 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/Ryuku72/04CodeQuiz?style=for-the-badge)
 ![GitHub contributors](https://img.shields.io/github/contributors/Ryuku72/04CodeQuiz?style=for-the-badge)
 
-## Code Quiz
+# Code Quiz
 __PROJECT04: 11/03/2020__
 
 ## Aim // Introduction
