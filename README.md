@@ -4,6 +4,7 @@
 
 # Code Quiz
 __PROJECT04: 11/03/2020__
+https://ryuku72.github.io/04CodeQuiz/
 
 ## Aim // Introduction
 This week we looked at how to manipulate the DOM to target, create and manipulate Elements through examples of shopping lists, timers, form applications and targetting exerciese. This assignments aim was to utilize theese leasons coupled with our Google-Fu to find the best means of creating the quiz app that included multiple choice, a timer, a page reset and points allocation.
